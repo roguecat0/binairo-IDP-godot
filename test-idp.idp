@@ -1,0 +1,31 @@
+#! IDP-Z3 0.9.2
+vocabulary {
+    type Row := {0..0}// type
+    type Col := {0..2}// type
+    type Value := {0..1} // type
+    cellValue: (Row * Col) -> Value // function
+    initialValue: (Row * Col * Value) -> Bool
+    horizontalEdge, verticalEdge: (Row * Col * Row * Col) -> Bool
+}
+
+structure {
+    initialValue := {}.
+}
+
+theory {
+    // Set the initial values.
+    !r in Row, c in Col, v in Value: initialValue(r, c, v) => cellValue(r, c) = v.
+    { // define the conditions for a horizontal and vertical egde
+        !r1,r2 in Row: !c1,c2 in Col: horizontalEdge(r1,c1,r2,c2) <- (r1 = r2 & c1 = c2+1 ).
+        !r1,r2 in Row: !c1,c2 in Col: verticalEdge(r1,c1,r2,c2) <- (r1 = r2+1 & c1 = c2 ).
+    }
+    // state that 3 cell with 2 of the same type of edge connecting them, should have at least 1 different number
+    !r1,r2,r3 in Row: !c1,c2,c3 in Col: horizontalEdge(r1,c1,r2,c2) & horizontalEdge(r2,c2,r3,c3) => (cellValue(r1,c1)~=cellValue(r2,c2) | cellValue(r2,c2)~=cellValue(r3,c3)).
+    !r1,r2,r3 in Row: !c1,c2,c3 in Col: verticalEdge(r1,c1,r2,c2) & verticalEdge(r2,c2,r3,c3) => (cellValue(r1,c1)~=cellValue(r2,c2) | cellValue(r2,c2)~=cellValue(r3,c3)).
+}
+
+
+procedure main() {
+    pretty_print(model_expand(T,S,max=1))
+    // pretty_print(Theory(T,S).to_smt_lib())
+}

@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccxclawnl2m74"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_k41dc"]
+[ext_resource type="PackedScene" uid="uid://ganju7sn03gq" path="res://cell.tscn" id="2_wm5kn"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k41dc")
+cell_scene = ExtResource("2_wm5kn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="ShowRow" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Num Columns: 1"
+
+[node name="Row_slider" type="HSlider" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="ShowCol" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Num Columns: 1"
+
+[node name="Col_slider" type="HSlider" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Solve"
+
+[node name="Button2" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Reset"
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.627451)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.988235, 0, 0.0117647, 1)
+theme_override_font_sizes/font_size = 50
+text = "Grid Not Satisfiable"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Row_slider" to="." method="_on_row_slider_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/VBoxContainer/Col_slider" to="." method="_on_col_slider_value_changed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]

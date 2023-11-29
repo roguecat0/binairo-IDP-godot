@@ -1,0 +1,3 @@
+[console_scripts]
+idp-engine=idp_engine.IDP_Z3:cli
+
