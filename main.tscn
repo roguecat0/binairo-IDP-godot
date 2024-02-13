@@ -32,7 +32,7 @@ text = "Num Columns: 1"
 [node name="Row_slider" type="HSlider" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 min_value = 1.0
-max_value = 10.0
+max_value = 12.0
 value = 1.0
 
 [node name="ShowCol" type="Label" parent="HBoxContainer/VBoxContainer"]
@@ -42,7 +42,7 @@ text = "Num Columns: 1"
 [node name="Col_slider" type="HSlider" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 min_value = 1.0
-max_value = 10.0
+max_value = 12.0
 value = 1.0
 
 [node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
